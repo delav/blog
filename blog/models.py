@@ -70,7 +70,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50, verbose_name='文章标题')
     desc = models.CharField(max_length=50, verbose_name='文章描述')
     content = models.TextField(verbose_name='文章内容')
-    click_count = models.IntegerField(default=0, verbose_name='点击次数')
+    click_count = models.PositiveIntegerField(default=0, verbose_name='点击次数')
     is_recommend = models.BooleanField(default=False, verbose_name='是否推荐')
     date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
     user = models.ForeignKey(User, verbose_name='用户')
@@ -87,13 +87,17 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title
 
+    def increase_click_count(self):
+        self.click_count += 1
+        self.save(update_fields=['click_count'])
+
 
 # 评论模型
 class Comment(models.Model):
     content = models.TextField(verbose_name='评论内容')
     username = models.CharField(max_length=30, blank=True, null=True, verbose_name='用户名')
     email = models.EmailField(max_length=50, blank=True, null=True, verbose_name='邮箱地址')
-    url = models.URLField(max_length=100, blank=True, null=True, verbose_name='个人网页网址')
+    # url = models.URLField(max_length=100, blank=True, null=True, verbose_name='个人网页网址')
     date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
     user = models.ForeignKey(User, blank=True, null=True, verbose_name='用户')
     article = models.ForeignKey(Article, blank=True, null=True, verbose_name='文章' )
@@ -106,34 +110,3 @@ class Comment(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-
-# 友情链接
-class Links(models.Model):
-    title = models.CharField(max_length=50, verbose_name='标题')
-    description = models.CharField(max_length=200, verbose_name='友情链接描述')
-    callback_url = models.URLField(verbose_name='url地址')
-    date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
-    index = models.IntegerField(default=999, verbose_name='排列顺序（从小到大）')
-
-    class Meta:
-        verbose_name = '友情链接'
-        verbose_name_plural = verbose_name
-        ordering = ['index', 'id']
-
-
-# 广告
-class Ad(models.Model):
-    title = models.CharField(max_length=50, verbose_name='广告标题')
-    description = models.CharField(max_length=200, verbose_name='广告描述')
-    image_url = models.ImageField(upload_to='ad/%Y/%m', verbose_name='图片路径')
-    callback_url = models.URLField(null=True, blank=True, verbose_name='回调URL')
-    date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
-    index = models.IntegerField(default=999, verbose_name='排列顺序（从大到小）')
-
-    class Meta:
-        verbose_name = u'广告'
-        verbose_name_plural = verbose_name
-        ordering = ['index', 'id']
-
-    def __unicode__(self):
-        return self.title

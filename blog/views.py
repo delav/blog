@@ -1,7 +1,6 @@
 # coding:utf-8
 import logging
-from django.shortcuts import render, redirect, HttpResponse
-from django.core.urlresolvers import reverse
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.hashers import make_password
@@ -9,11 +8,10 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnIn
 from django.db.models import Count
 from models import *
 from forms import *
-import datetime
 
 # Create your views here.
 
-logger = logging.getLogger('blog.views')
+logger = logging.getLogger('blog.views')  # 日志器
 
 
 # 读取setting的配置文件
@@ -32,13 +30,6 @@ def global_setting(request):
 
     return {'SITE_NAME': settings.SITE_NAME,
             'SITE_DESC': settings.SITE_DESC,
-            'WEIBO_SINA': settings.WEIBO_SINA,
-            'WEIBO_TENCENT': settings.WEIBO_TENCENT,
-            'PRO_RSS': settings.PRO_RSS,
-            'JIKE': settings.JIKE,
-            'PYFORUM': settings.PYFORUM,
-            'IT': settings.IT,
-            'HTMLCSS': settings.HTMLCSS,
             'category_list': category_list,
             'click_list': click_list,
             'comment_list': comment_list,
@@ -103,7 +94,6 @@ def category(request):
 
 # 分页
 def getPage(request, article_list):
-
     paginator = Paginator(article_list, 5)
     try:
         page = int(request.GET.get('page', 1))
@@ -119,13 +109,14 @@ def article(request):
         id = request.GET.get('id', None)
         try:
             article = Article.objects.get(pk=id)
+            article.increase_click_count()
         except Article.DoesNotExist:
             return render(request, 'failure.html', {'reason': '没有找到对应的文章'})
 
         # 评论表单
         comment_form = CommentForm({'author': request.user.username,
                                     'email': request.user.email,
-                                    'url': request.user.url,
+                                    # 'url': request.user.url,
                                     'article': id} if request.user.is_authenticated() else{'article': id})
         # 获取评论信息
         comments = Comment.objects.filter(article=article).order_by('id')
@@ -140,7 +131,7 @@ def article(request):
             if comment.pid is None:
                 comment_list.append(comment)
     except Exception as e:
-        print e
+        # print e
         logger.error(e)
     return render(request, 'article.html', locals())
 
@@ -153,7 +144,7 @@ def comment_post(request):
             # 获取表单信息
             comment = Comment.objects.create(username=comment_form.cleaned_data["author"],
                                              email=comment_form.cleaned_data["email"],
-                                             url=comment_form.cleaned_data["url"],
+                                             # url=comment_form.cleaned_data["url"],
                                              content=comment_form.cleaned_data["comment"],
                                              article_id=comment_form.cleaned_data["article"],
                                              user=request.user if request.user.is_authenticated() else None)
@@ -170,7 +161,7 @@ def do_logout(request):
     try:
         logout(request)
     except Exception as e:
-        print e
+        # print e
         logger.error(e)
     return redirect(request.META['HTTP_REFERER'])
 
@@ -184,7 +175,7 @@ def do_reg(request):
                 # 注册
                 user = User.objects.create(username=reg_form.cleaned_data["username"],
                                            email=reg_form.cleaned_data["email"],
-                                           url=reg_form.cleaned_data["url"],
+                                           # url=reg_form.cleaned_data["url"],
                                            password=make_password(reg_form.cleaned_data["password"]),)
                 user.save()
 
@@ -205,11 +196,10 @@ def do_reg(request):
 def do_login(request):
     try:
         if request.method == 'POST':
-            login_form = LoginForm(request.POST)
-            if login_form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            if username and password:
                 # 登录
-                username = login_form.cleaned_data["username"]
-                password = login_form.cleaned_data["password"]
                 user = authenticate(username=username, password=password)  # 认证用户
                 if user is not None:
                     user.backend = 'django.contrib.auth.backends.ModelBackend'  # 指定默认的登录验证方式
@@ -218,7 +208,7 @@ def do_login(request):
                     return render(request, 'failure.html', {'reason': '登录验证失败'})
                 return redirect(request.POST.get('source_url'))
             else:
-                return render(request, 'failure.html', {'reason': login_form.errors})
+                return render(request, 'failure.html', {'reason': '表单错误'})
         else:
             login_form = LoginForm()
     except Exception as e:

@@ -18,8 +18,9 @@
 <body>
 <header>
   <div class="logo">
-      <h1>{{ SITE_NAME }}</h1>
-      <p>{{ SITE_DESC }}</p>
+{#      <h1>{{ SITE_NAME }}</h1>#}
+      <img src="../../static/images/name.png" width="100%" height="134px">
+{#      <p>{{ SITE_DESC }}</p>#}
   </div>
   <nav id="topnav" class="f_r">
     <ul>
@@ -37,14 +38,13 @@
   </div>
   <div class="r_box f_r">
     <div class="tit01">
-      <h3>关注我</h3>
+{#      <h3>关注我</h3>#}
       <div class="gzwm">
         <ul>
-          <li><a class="xlwb" href="{{ WEIBO_SINA }}" target="_blank">新浪微博</a></li>
-          <li><a class="txwb" href="{{ WEIBO_TENCENT }}" target="_blank">腾讯微博</a></li>
-          <li><a class="rss" href="{{ PRO_RSS }}" target="_blank">BILIBILI</a></li>
+            <li><img src="../../static/images/mon.png" width="100px" height="100px"></li>
         </ul>
       </div>
+         <h4>{{ SITE_DESC }}</h4>
     </div>
     <!--tit01 end-->
     <div class="moreSelect" id="lp_right_select">
@@ -69,22 +69,16 @@ window.onload = function ()
 </script>
       <div class="ms-top">
         <ul class="hd" id="tab">
-          <li class="cur"><a href="/">浏览排行</a></li>
-          <li><a href="/" >评论排行</a></li>
+          <li class="cur"><a >浏览排行</a></li>
+{#          <li><a href="/" >评论排行</a></li>#}
         </ul>
       </div>
       <div class="ms-main" id="ms-main">
         <div style="display: block;" class="bd bd-news" >
           <ul>
               {% for click in click_list %}
-            <li><a href="{% url 'article' %}?id={{ click.id }}" target="_parent">{{ click.title |slice:'10' }}</a></li>
-              {% endfor %}
-          </ul>
-        </div>
-        <div  class="bd bd-news">
-          <ul>
-              {% for article in article_comment_list %}
-            <li><a href="{% url 'article' %}?id={{ article.id }}" target="_parent">{{ article.title | slice:'10'}}</a></li>
+{#                  |slice:'15' #}
+            <li><a href="{% url 'article' %}?id={{ click.id }}" target="_parent">{{ click.title}}</a></li>
               {% endfor %}
           </ul>
         </div>
@@ -114,16 +108,6 @@ window.onload = function ()
         </li>
         {% endfor %}
       </ul>
-
-    <div class="links">
-      <h3>友情链接</h3>
-      <ul>
-        <li><a href="{{ JIKE }}" target="_blank">极客学院</a></li>
-        <li><a href="{{ IT }}" target="_blank">IT资源</a></li>
-        <li><a href="{{ HTMLCSS }}" target="_blank">Html+css</a></li>
-        <li><a href="{{ PYFORUM }}" target="_blank">python论坛</a></li>
-      </ul>
-    </div>
   </div>
   <!--r_box end -->
 </div>

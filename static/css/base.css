@@ -1,7 +1,7 @@
 @charset "gb2312";
 /* 共用css */
-* { margin: 0; padding: 0 }
-body { font: 12px/1.5 'Microsoft Yahei', 'Simsun'; color: #666666; background: #fff }
+* { margin: 0; padding: 0;}
+body { font: 14px/1.5 'Microsoft Yahei', 'Simsun'; color: #666666; background: #fff  }
 img { border: 0; display: block }
 ul { list-style: none; }
 h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; }
@@ -13,16 +13,16 @@ a:hover { text-decoration: none; }
 .f_l { float: left }
 .f_r { float: right }
 .l_box { width: 670px; }
-.r_box { width: 300px; }
+.r_box { width: 270px; }
 /* 头部信息 */
 header { width: 1000px; margin: 20px auto; overflow: hidden; clear: both; }
-#topnav { width: 100%; background: #48AE15; height: 46px; line-height: 46px; text-align: left; border-radius: 46px; }
+#topnav { width: 100%; background: #33CCFF; height: 46px; line-height: 46px; text-align: left; border-radius: 0; }
 #topnav ul{ margin-left:50px; }
 #topnav a { display: inline-block; font-size: 18px; font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif; padding: 0 20px; }
-#topnav a:hover { background: #fff; color: #000; }
-#topnav a { color: #FFF }
-#topnav_current { background: #F3FF41; }/* 高亮选中颜色 */
-a#topnav_current { color: #000 }
+#topnav a:hover { background: #0000FF; color:#fff; }
+#topnav a { color: #000000 }
+#topnav_current { background: #FFFF00; }/* 高亮选中颜色 */
+#topnav_current { color: #000 }
 article { width: 1000px; margin: 20px auto; }
 /*footer*/
 footer { background: #333; width: 100%; clear: both; text-align: center; }
@@ -61,11 +61,11 @@ _margin-bottom: 15px; }/*解决IE6下不兼容 position:fixed 的问题*/
 .bd { display: none }
 .bd-news ul { padding: 10px 0 0 10px; background: url(../images/ph2.png) no-repeat 10px 29px; }
 .bd-news ul li { border-bottom: solid 1px #EAEAEA; line-height: 30px; height: 30px; overflow: hidden; font-size: 14px; padding: 10px 0 0 30px; }
-.bd-news ul li a { display: block; }
+.bd-news ul li a { display: block; text-overflow:ellipsis;white-space: nowrap;overflow: hidden;}
 .bd-news ul li a:hover { color: #000; }
 .bd-news ul li:hover { border-bottom: #000 1px solid; }/* 鼠标放上去的效果 */
-.logo{ margin-bottom:20px; padding-left:10px; }
-.logo h1{ font-size:30px; font-weight:blod; }
+.logo{ margin-top: 0; margin-bottom:0; padding-left:0; }
+.logo h1{ font-size:30px; font-weight:lighter; font-style:italic }
 .font-size-18{ font-size:18px; }
 
 /*分页效果*/
@@ -80,26 +80,30 @@ _margin-bottom: 15px; }/*解决IE6下不兼容 position:fixed 的问题*/
 #pagination-flickr a:hover { border:solid 1px #000; background:#0063DC; color:#FFF; }
 
 /*文章详情*/
-.postdate{float: left;display: block;background: url(../images/date.gif) no-repeat;height: 48px;width: 48px;line-height: 160%; margin-left: 10px; margin-right: 10px;}
+.postdate{float: left;display: block;background: url(../images/date1.png) no-repeat;height: 48px;width: 48px;line-height: 160%; margin-left: 0; margin-right: 10px;}
 .month{text-transform: uppercase;text-align: center;color: #fcfff5;font-size: 12px;}
-.date{text-align: center;margin-top: 2px;font-size: 18px;}
+.date{text-align: center;margin-top: 1px;font-size: 18px;}
 .postmeta{color: #666666;font-size: 12px;}
 .postmeta_category{background: url(../images/category.gif) no-repeat;padding: 0 5px 0 18px;}
 .postmeta_comments{background: url(../images/comments.gif) no-repeat;padding-left: 18px;}
 .postmeta_author{background: url(../images/author.gif) no-repeat;padding: 0 5px 0 18px;}
-.postmeta_time{background: url(../images/time.gif) no-repeat;padding-left: 18px;}
+.postmeta_time{background: url(../images/time.png) no-repeat;padding-left: 18px;}
 .postmeta_category a{color: #666666;}
 .postmeta_comments a{color: #666666;}
 .title{height: 48px;}
 .title h2{line-height: 120%;}
-.title h2 a{color: #3e606f;font-size: 20px;line-height: 140%;}
+.title h2 a{color: #3e606f;font-size: 22px;line-height: 140%;}
 .title h2 a:hover{color: #db5104;}
 .title .postmeta a:hover{color: #db5104;}
+.split {
+	margin-top: 10px;
+	border-bottom: #EE82EE  1px solid;
+}
+
 .entry {
-	margin: 20px 0 5px 0;
-	margin-left: 10px;
+	margin: 45px 0 10px 0;
 	padding-bottom: 5px;
-	border-bottom: 1px dashed #cccccc;
+	/*border-bottom: 1px dashed #cccccc;*/
 }
 
 .entry a {
@@ -117,13 +121,18 @@ _margin-bottom: 15px; }/*解决IE6下不兼容 position:fixed 的问题*/
 .tags {
 	background: url(../images/tags.gif) no-repeat;
 	padding-left: 20px;
-	margin-left: 10px;
 	color: #666666;
 }
 
 .tags a {
-	color: #666666;
+	color: #00DD00;
 	text-decoration: none;
+	margin-left:10px;
+	/*background: #F0F8FF ;*/
+	/*border-color:#F0F8FF ;*/
+	/*border-width:1px;*/
+	/*border-style:solid;*/
+	/*border-radius: 9px;*/
 }
 
 .tags a:hover {
@@ -229,7 +238,7 @@ h3 {
 }
 
 input#author, input#email, input#url, textarea#comment {
-	margin-left: 12px;
+	margin-left: 0;
 	border: 2px solid #e3e5e4;
 	padding: 2px;
 	width: 200px;
@@ -263,7 +272,7 @@ input#submit {
 }
 
 .login_info{
-	margin: 10px;
+	margin: 0;
 }
 
 .reply{

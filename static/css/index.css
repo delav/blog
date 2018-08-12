@@ -1,6 +1,7 @@
 @charset "gb2312";
 /* 幻灯片 */
-.banner { height : 280px; width : 670px; overflow : hidden; }
+/*.banner { height : 280px; width : 670px; overflow : hidden; }*/
+.banner { height : 0; width : 0; overflow : hidden; }
 #slide-runner { height : 280px; width : 670px; overflow : hidden; position : absolute; }
 #slide-holder img { position : absolute; }
 #slide-controls { left : 0; bottom : 0px; width : 670px; height : 34px; display : none; position : absolute; background : url(../images/slide-bg.png) 0 0; }
@@ -31,17 +32,11 @@
 .pingl { background: url(../images/newsbg03.png) no-repeat left center }
 .tit01 h3 { line-height: 40px; color: #38485A; font-size: 18px; border-bottom: 1px solid #E6E6E6; height: 40px }
 /* 关注我样式 */
-.gzwm ul { width: 100%; margin: 40px 0; overflow: hidden }
-.gzwm li { width: 70px; margin: 0 18px 0 5px; float: left; }
-.gzwm li a { color: #747F8C; width: 52px; text-align: center; padding-top: 60px; float: left; }
-.gzwm .rss { background: url(../images/ico_04_1.png) no-repeat scroll 0% 0% transparent; }
-.gzwm .rss:hover { color: #000; background: url(../images/ico_04.png) no-repeat scroll 0% 0% transparent; }
+.gzwm ul { width: 100%; margin: 20px 0; overflow: hidden }
+.gzwm li { width: 52px; margin: 0 18px 0 5px; float: left; }
 .gzwm .xlwb { background: url(../images/ico_05_1.jpg) no-repeat scroll 0% 0% transparent; }
 .gzwm .xlwb:hover { color: #000; background: url(../images/ico_05.png) no-repeat scroll 0% 0% transparent; }
-.gzwm .txwb { background: url(../images/ico_06_1.jpg) no-repeat scroll 0% 0% transparent; }
-.gzwm .txwb:hover { color: #000; background: url(../images/ico_06.png) no-repeat scroll 0% 0% transparent; }
-.gzwm .wx { background: url(../images/ico_06_1.jpg) no-repeat scroll 0% 0% transparent; }
-/*图文列表*/
+
 .tuwen { width: 100%; clear: both; overflow: hidden; margin: 20px 0 }
 .tuwen h3 { line-height: 40px; color: #38485A; font-size: 18px; border-bottom: 1px solid #E6E6E6; height: 40px; margin-bottom: 30px }
 .tuwen li { overflow: hidden; clear: both; margin-bottom: 10px }
@@ -59,11 +54,11 @@
 .ad { width: 300px; overflow: hidden; margin: 30px 0 }
 .ad img { width: 300px; }
 /*友情链接*/
-.links { width: 100%; overflow: hidden; clear: both }
+.links { width: 100%; overflow: hidden; clear: both; background: #000}
 .links h3 { line-height: 40px; color: #38485A; font-size: 18px; border-bottom: 1px solid #E6E6E6; height: 40px; margin-bottom: 20px }
 .links h3 span { float: right; font-size: 12px; }
 .links h3 span a { color: #999; padding: 0 5px }
 .links h3 span a:hover { color: #F60; text-decoration: underline }
-.links ul { background: #E7E0E0; padding: 10px; overflow: hidden; border: #e9e9e9 1px solid }
+.links ul { background: #000000; padding: 10px; overflow: hidden; border: #e9e9e9 1px solid }
 .links ul li { float: left; padding: 5px 8px }
 .links ul li a:hover { color: #000 }
